@@ -26,7 +26,8 @@ SeriesMaker-AIDE performs the following:
 3. Edits some basic DICOM metadata
    1. SeriesNumber
    2. InstanceNumber
-4. Outputs the edited DICOM Series
+4. Randomly shuffles PixelData to differentiate edited DICOM Series from original datasets in the Study 
+5. Outputs the edited DICOM Series
 
 The purpose of SeriesMaker-AIDE is to create a new dummy DICOM Series which can be output to the originating DICOM 
 Study. This is useful for testing and verifying AIDE export destinations.
