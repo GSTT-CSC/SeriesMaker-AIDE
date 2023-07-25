@@ -17,8 +17,7 @@
 ## Overview
 
 SeriesMaker-AIDE is a simple AIDE app for testing DICOM end-to-end connectivity with clinical information
-systems such as PACS or scanner software. The purpose of SeriesMaker-AIDE is to create a new dummy DICOM Series which
-can be output to the originating DICOM Study. This is useful for testing new DICOM endpoints.
+systems such as PACS or scanner software.
 
 SeriesMaker-AIDE performs the following:
 
@@ -28,6 +27,9 @@ SeriesMaker-AIDE performs the following:
    1. SeriesNumber
    2. InstanceNumber
 4. Outputs the edited DICOM Series
+
+The purpose of SeriesMaker-AIDE is to create a new dummy DICOM Series which can be output to the originating DICOM 
+Study. This is useful for testing and verifying AIDE export destinations.
 
 
 ## Developer Instructions

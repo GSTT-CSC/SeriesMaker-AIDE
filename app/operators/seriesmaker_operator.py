@@ -1,4 +1,5 @@
 import logging
+from numpy.random import shuffle
 from typing import List
 from pydicom.uid import generate_uid
 
@@ -71,17 +72,25 @@ class SeriesMakerOperator(Operator):
                 # Define new Instance level DICOM tags
                 new_sop_instance_uid = generate_uid()
 
+                logging.info(f"Writing DICOM file: {idx + 1} of {num_instances_in_series} ...")
+
                 # Edit DICOM tags
                 ds.SOPInstanceUID = new_sop_instance_uid
                 ds.SeriesInstanceUID = new_series_instance_uid
                 ds.SeriesNumber = new_series_number
                 ds.SeriesDescription = new_series_description
 
-                logging.info(f"Writing DICOM file: {idx+1} of {num_instances_in_series} ...")
                 logging.info(f"New SOPInstanceUID: {ds.SOPInstanceUID}")
                 logging.info(f"New SeriesInstanceUID: {ds.SeriesInstanceUID}")
                 logging.info(f"New SeriesNumber: {ds.SeriesNumber}")
                 logging.info(f"New InstanceNumber: {ds.InstanceNumber}")
+
+                # Shuffle pixel_array, so obviously not diagnostic
+                arr = ds.pixel_array
+                shuffle(arr)
+                shuffle(arr.T)
+                ds.PixelData = arr.tobytes()
+                logging.info("Shuffling PixelData ...")
 
                 # Instance file name defined as the new SOPInstanceUID
                 file_path = output_dir.joinpath(f"{ds.SOPInstanceUID}.dcm")
