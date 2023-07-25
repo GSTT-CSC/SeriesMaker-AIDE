@@ -1,4 +1,4 @@
 monai
 monai-deploy-app-sdk
 typeguard~=2.12.1  # known issue in monai-deploy-app-sdk https://github.com/Project-MONAI/monai-deploy-app-sdk/issues/410
-pydicom
+highdicom
