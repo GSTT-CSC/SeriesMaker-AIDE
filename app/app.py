@@ -18,10 +18,10 @@ from operators.seriesmaker_operator import SeriesMakerOperator
 
 
 config = json.load(
-    open(Path(__file__).resolve().parent / "app" / "app_config.json")
+    open(Path(__file__).resolve().parent / "app_config.json")
 )
 requirements_file = (
-    Path(__file__).resolve().parent / "requirements.txt"
+    Path(__file__).resolve().parent / ".." / "requirements.txt"
 )
 
 
@@ -64,13 +64,8 @@ class SeriesMakerApp(Application):
             {"dicom_study_list": "dicom_study_list"})
         self.add_flow(
             series_selector_op,
-            series_to_vol_op,
-            {"study_selected_series_list": "study_selected_series_list"}
-        )
-        self.add_flow(
-            series_to_vol_op,
             new_series_op,
-            {"image": "image"}
+            {"study_selected_series_list": "study_selected_series_list"}
         )
 
         logging.info(f"End {self.compose.__name__}")
