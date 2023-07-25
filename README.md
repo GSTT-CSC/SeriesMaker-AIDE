@@ -48,7 +48,7 @@ python -m venv venv
 source venv/bin/activate
 
 pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt
+pip install -r app/requirements.txt
 ```
 
 3. Create `input` and `output` directories
@@ -77,7 +77,7 @@ python app -i input/ -o output/
 
 ```shell
 # Package MAP
-monai-deploy package app --tag ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 -l DEBUG
+monai-deploy package app --tag ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 -r app/requirements.txt -l DEBUG
 
 # Test MAP with MONAI Deploy
 monai-deploy run ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 input/ output/
