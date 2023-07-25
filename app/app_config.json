@@ -1,0 +1,12 @@
+{
+    "info": {
+        "name": "SeriesMaker-AIDE",
+        "description": "Simple AIDE app for testing DICOM end-to-end connectivity",
+        "application_version": "appdev"
+    },
+    "resources": {
+        "cpu": 1,
+        "memory": "8Gi",
+        "gpu": 0
+    }
+} 
