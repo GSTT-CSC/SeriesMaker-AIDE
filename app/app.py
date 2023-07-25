@@ -21,7 +21,7 @@ config = json.load(
     open(Path(__file__).resolve().parent / "app_config.json")
 )
 requirements_file = (
-    Path(__file__).resolve().parent / ".." / "requirements.txt"
+    Path(__file__).resolve().parent / "requirements.txt"
 )
 
 
