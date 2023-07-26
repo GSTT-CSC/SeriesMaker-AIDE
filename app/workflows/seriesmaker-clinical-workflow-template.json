@@ -1,0 +1,103 @@
+{
+  "name": "SeriesMaker",
+  "version": "0.1.0",
+  "description": "Clinical Workflow for SeriesMaker test app",
+  "informatics_gateway": {
+    "ae_title": "AIDE",
+    "data_origins": [],
+    "export_destinations": [
+      "PACS"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "seriesmaker-task",
+      "description": "Creates edited DICOM Series",
+      "type": "argo",
+      "args": {
+        "workflow_template_name": "seriesmaker-template"
+      },
+      "task_destinations": [
+        {
+          "name": "clinical-review-task",
+          "conditions": []
+        }
+      ],
+      "export_destinations": [],
+      "artifacts": {
+        "input": [
+          {
+            "name": "input-dicom",
+            "value": "{{ context.input.dicom }}",
+            "mandatory": true
+          }
+        ],
+        "output": [
+          {
+            "name": "output",
+            "value": "",
+            "mandatory": true
+          }
+        ]
+      },
+      "timeout_minutes": -1
+    },
+    {
+      "id": "clinical-review-task",
+      "description": "SeriesMaker Clinical Review Task",
+      "type": "aide_clinical_review",
+      "args": {
+        "reviewed_task_id": "seriesmaker-task",
+        "application_name": "seriesmaker",
+        "application_version": "0.1.0",
+        "mode": "QA",
+        "reviewer_roles": "clinician",
+        "notifications": "true",
+        "workflow_name": "SeriesMaker"
+      },
+      "task_destinations": [
+        {
+          "name": "export-dicom",
+          "conditions": []
+        }
+      ],
+      "export_destinations": [],
+      "artifacts": {
+        "input": [
+          {
+            "name": "output",
+            "value": "{{ context.executions.seriesmaker-task.artifacts.output }}",
+            "mandatory": true
+          }
+        ],
+        "output": []
+      },
+      "timeout_minutes": -1
+    },
+    {
+      "id": "export-dicom",
+      "description": "Export edited DICOM Series",
+      "type": "export",
+      "args": {
+        "workflow_name": "SeriesMaker"
+      },
+      "task_destinations": [],
+      "export_destinations": [
+        {
+          "name": "PACS"
+        }
+      ],
+      "artifacts": {
+        "input": [
+          {
+            "name": "output",
+            "value": "{{ context.executions.seriesmaker-task.artifacts.output }}",
+            "mandatory": true
+          }
+        ],
+        "output": []
+      },
+      "timeout_minutes": -1
+    }
+  ]
+}

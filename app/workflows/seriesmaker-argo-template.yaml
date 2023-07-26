@@ -1,0 +1,38 @@
+metadata:
+  name: seriesmaker-template
+  generateName: seriesmaker-template
+  namespace: argo
+spec:
+  templates:
+    - name: seriesmaker
+      inputs:
+        artifacts:
+          - name: input-dicom
+            path: /var/monai/input
+            s3:
+              key: argo/inputs/artifacts/input-dicom
+      outputs:
+        artifacts:
+          - name: output
+            path: /var/monai/output
+            s3:
+              key: /var/monai/output
+      metadata: {}
+      container:
+        name: ''
+        image: ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0
+        command:
+          - /bin/bash
+          - '-c'
+        args:
+          - python3 -u /opt/monai/app/app.py
+        resources:
+          limits:
+            cpu: '1'
+            memory: 8Gi
+          requests:
+            cpu: '0'
+            memory: '0'
+        imagePullPolicy: IfNotPresent
+  entrypoint: seriesmaker
+  arguments: {}
