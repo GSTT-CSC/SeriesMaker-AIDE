@@ -77,13 +77,13 @@ python app -i input/ -o output/
 
 ```shell
 # Package MAP
-monai-deploy package app --tag ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 -r app/requirements.txt -l DEBUG
+monai-deploy package app --tag ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.1 -r app/requirements.txt -l DEBUG
 
 # Test MAP with MONAI Deploy
-monai-deploy run ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 input/ output/
+monai-deploy run ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.1 input/ output/
 
 # Push MAP to GHCR
-docker push ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0
+docker push ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.1
 ```
 
 ### Optional 
@@ -91,11 +91,11 @@ docker push ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0
 Enter Docker container for testing
 
 ```shell
-docker run --gpus all -it --rm -v /SeriesMaker-AIDE/input:/var/monai/input/ --entrypoint /bin/bash ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0
+docker run --gpus all -it --rm -v /SeriesMaker-AIDE/input:/var/monai/input/ --entrypoint /bin/bash ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.1
 ```
 
 Run on specified GPU if machine has >1 available
 
 ```shell
-CUDA_VISIBLE_DEVICES=2 monai-deploy run ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.0 input/ output/
+CUDA_VISIBLE_DEVICES=2 monai-deploy run ghcr.io/gstt-csc/seriesmaker-aide/map:0.1.1 input/ output/
 ```

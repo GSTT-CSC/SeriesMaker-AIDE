@@ -1,6 +1,6 @@
 {
   "name": "SeriesMaker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Clinical Workflow for SeriesMaker test app",
   "informatics_gateway": {
     "ae_title": "AIDE",
@@ -49,7 +49,7 @@
       "args": {
         "reviewed_task_id": "seriesmaker-task",
         "application_name": "seriesmaker",
-        "application_version": "0.1.0",
+        "application_version": "0.1.1",
         "mode": "QA",
         "reviewer_roles": "clinician",
         "notifications": "true",
