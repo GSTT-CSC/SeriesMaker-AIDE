@@ -12,7 +12,6 @@ from monai.deploy.core import Application, resource
 from monai.deploy.operators import (
     DICOMDataLoaderOperator,
     DICOMSeriesSelectorOperator,
-    DICOMSeriesToVolumeOperator,
 )
 from operators.seriesmaker_operator import SeriesMakerOperator
 
@@ -55,7 +54,6 @@ class SeriesMakerApp(Application):
 
         study_loader_op = DICOMDataLoaderOperator()
         series_selector_op = DICOMSeriesSelectorOperator()
-        series_to_vol_op = DICOMSeriesToVolumeOperator()
         new_series_op = SeriesMakerOperator()
 
         self.add_flow(
